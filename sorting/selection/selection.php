@@ -16,7 +16,7 @@ for ($i = 0; $i < count($arr); $i++) {
     for ($j = $i; $j < count($arr); $j++) {
         if ($minPos == -1)
             $minPos = $j;
-        elseif($arr[$minPos] > $arr[$j])
+        elseif ($arr[$minPos] > $arr[$j])
             $minPos = $j;
     }
     $temp = $arr[$i];
