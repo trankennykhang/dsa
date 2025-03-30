@@ -1,15 +1,13 @@
 <?php
-namespace dsa\bootstrap;
-class CONFIG {
+global $CFG;
 
-    private static $_instance;
-    private $arr = array();
-    private function __construct() {}
-    public static function get() {
-        if (!isset(self::$_instance)) {
-            self::$_instance = new self();
-            $this->_instance
-        }
-    }
-}
-?>
+$CFG = new stdClass();
+
+$CFG->dirroot = '/home/kenny/www/sites/dsa';
+
+$CFG->algorithms = [
+    "sorting",
+    'searching'
+];
+
+$CFG->execute = 'all';
