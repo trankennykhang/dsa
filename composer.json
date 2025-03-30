@@ -10,6 +10,7 @@
     }
   ],
   "require": {
+    "symfony/yaml": ">=v7.1.11"
   },
   "require-dev": {
     "phpunit/phpunit": "^12.0.7"

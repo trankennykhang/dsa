@@ -1,0 +1,8 @@
+version: 1
+algorithms:
+  sorting:
+    selection
+  searching:
+  data_structure:
+  performance:
+execute:
