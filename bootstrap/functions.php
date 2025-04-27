@@ -20,6 +20,18 @@ function auto_register_algorithm() {
     }
     return $arr;
 }
+function auto_load_utilities() {
+    global $CFG;
+    if (is_dir($CFG->dirroot . '/utilities')) {
+        $dir = dir($CFG->dirroot . '/utilities');
+        while (($entry = $dir->read()) !== false) {
+            if ($entry != '.' && $entry != '..') {
+                // @todo prep_match check php extension
+                include $CFG->dirroot . '/utilities/' . $entry;
+            }
+        }
+    }
+}
 function get_children_folders(string $path): array {
     global $CFG;
     $dirs = [];

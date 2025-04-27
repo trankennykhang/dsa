@@ -10,4 +10,4 @@ $CFG->algorithms = [
     'searching'
 ];
 
-$CFG->execute = 'all';
+$CFG->execute = ['all'];

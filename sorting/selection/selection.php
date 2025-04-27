@@ -1,6 +1,8 @@
 <?php
 namespace dsa\sorting;
 use dsa\interface\IAlgorithm;
+use dsa\utilities\Number;
+use dsa\utilities\Timer;
 
 /**
  * @author Kenny Tran
@@ -10,12 +12,9 @@ class Selection implements IAlgorithm
     public function execute()
     {
         // TODO: Implement execute() method.
-        $numberOfElements = 100;
-        $arr = [];
-        for ($i = 0; $i < $numberOfElements; $i++) {
-            $arr[] = rand(0, 1000);
-        }
-        $timeStart = microtime(true);
+        $arr = Number::persistence_random_array();
+
+        Timer::start();
 
         // Implement the selection algorithm (min to max)
         $minPos = -1;
@@ -30,6 +29,8 @@ class Selection implements IAlgorithm
             $arr[$i] = $arr[$minPos];
             $arr[$minPos] = $temp;
         }
+        Timer::stop();
+        print "Total time: " . Timer::getTime() . "\n";
         print implode(",", $arr);
         print PHP_EOL;
     }
