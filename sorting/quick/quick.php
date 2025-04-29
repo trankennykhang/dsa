@@ -1,15 +1,15 @@
 <?php
 namespace dsa\sorting;
-use dsa\interface\IAlgorithm;
+use dsa\interface\BaseAlgorithm;
 use dsa\utilities\Number;
 use dsa\utilities\Timer;
 
 /**
  * @author Kenny Tran
  */
-class Quick implements IAlgorithm
+class Quick extends BaseAlgorithm
 {
-    public function execute()
+    public function execute() : void
     {
         // TODO: Implement execute() method.
         $arr = Number::persistence_random_array();
@@ -23,22 +23,13 @@ class Quick implements IAlgorithm
         print PHP_EOL;
     }
 
-    public function register()
-    {
-        // TODO: Implement register() method.
-    }
-
-    public function description()
-    {
-        // TODO: Implement description() method.
-    }
-
-    public function name()
-    {
-        // TODO: Implement name() method.
-        return __CLASS__;
-    }
-    private function quick(array &$arr, $start, $end)
+    /**
+     * @param array<int, int> $arr
+     * @param int $start
+     * @param int $end
+     * @return void
+     */
+    private function quick(array &$arr, int $start, int $end): void
     {
         if ($start < $end) {
             $pivot = $this->partition($arr, $start, $end);
@@ -53,7 +44,13 @@ class Quick implements IAlgorithm
         $b = $temp;
     }
 
-    // Partition function
+    /**
+     * Partition array
+     * @param array<int, int> $arr
+     * @param int $start
+     * @param int $end
+     * @return int
+     */
     private function partition(array &$arr, int $start, int $end) : int
     {
         $j = $start;
@@ -69,5 +66,4 @@ class Quick implements IAlgorithm
         return $j;
 
     }
-
 }

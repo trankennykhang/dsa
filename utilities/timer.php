@@ -4,7 +4,7 @@ namespace dsa\utilities;
 class Timer {
     public static float $startTime = 0;
     public static float $endTime = 0;
-    public static $micro = true;
+    public static bool $micro = true;
     public static function start() : void
     {
         if (self::$micro) {

@@ -3,9 +3,9 @@
 namespace dsa\interface;
 interface IAlgorithm
 {
-    public function register();
-    public function execute();
-    public function description();
-    public function name();
+    public function register() : void;
+    public function execute() : void;
+    public function description() : void;
+    public function name() : string;
 
 }

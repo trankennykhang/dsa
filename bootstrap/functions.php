@@ -1,9 +1,14 @@
 <?php
-function get_config() {
+function get_config() : \stdClass
+{
     global $CFG;
     return $CFG;
 }
-function auto_register_algorithm() {
+/**
+ * @return array<string, array<string, string>>
+ */
+function auto_register_algorithm() : array
+{
     global $CFG;
     $arr = [];
     foreach ($CFG->algorithms as $algorithm) {
@@ -20,7 +25,8 @@ function auto_register_algorithm() {
     }
     return $arr;
 }
-function auto_load_utilities() {
+function auto_load_utilities() : void
+{
     global $CFG;
     if (is_dir($CFG->dirroot . '/utilities')) {
         $dir = dir($CFG->dirroot . '/utilities');
@@ -32,7 +38,13 @@ function auto_load_utilities() {
         }
     }
 }
-function get_children_folders(string $path): array {
+
+/**
+ * @param string $path
+ * @return array<int, string>
+ */
+function get_children_folders(string $path): array
+{
     global $CFG;
     $dirs = [];
     if (is_dir($CFG->dirroot . '/' . $path)) {
@@ -45,7 +57,8 @@ function get_children_folders(string $path): array {
     }
     return $dirs;
 }
-function is_valid_algorithm(string $path, $name): bool {
+function is_valid_algorithm(string $path, string $name): bool
+{
     // check for
     if (!file_exists($path . '/' . $name .'.php')) {
         throw new Exception("$path is not a valid algorithm");

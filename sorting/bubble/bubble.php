@@ -1,15 +1,15 @@
 <?php
 namespace dsa\sorting;
-use dsa\interface\IAlgorithm;
+use dsa\interface\BaseAlgorithm;
 use dsa\utilities\Number;
 use dsa\utilities\Timer;
 
 /**
  * @author Kenny Tran
  */
-class Bubble implements IAlgorithm
+class Bubble extends BaseAlgorithm
 {
-    public function execute()
+    public function execute() : void
     {
         // TODO: Implement execute() method.
         $arr = Number::persistence_random_array();
@@ -32,21 +32,5 @@ class Bubble implements IAlgorithm
         print "Total time: " . Timer::getTime() . "\n";
         print implode(",", $arr);
         print PHP_EOL;
-    }
-
-    public function register()
-    {
-        // TODO: Implement register() method.
-    }
-
-    public function description()
-    {
-        // TODO: Implement description() method.
-    }
-
-    public function name()
-    {
-        // TODO: Implement name() method.
-        return __CLASS__;
     }
 }
