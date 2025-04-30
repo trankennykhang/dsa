@@ -13,10 +13,10 @@ function autoRegisterAlgorithm() : array
     $arr = [];
     foreach ($CFG->algorithms as $algorithm) {
         $arr[$algorithm] = [];
-        $folders = get_children_folders($algorithm);
+        $folders = getChildrenFolders($algorithm);
         foreach ($folders as $folder) {
             // Check for valid structure
-            if (is_valid_algorithm($CFG->dirroot . '/' . $algorithm . '/' . $folder, $folder)) {
+            if (isValidAlgorithm($CFG->dirroot . '/' . $algorithm . '/' . $folder, $folder)) {
                 // include ();
                 include $CFG->dirroot . '/' . $algorithm . '/' . $folder . '/' . $folder. '.php';
                 $arr[$algorithm][] = $folder;
