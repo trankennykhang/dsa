@@ -7,7 +7,7 @@ function get_config() : \stdClass
 /**
  * @return array<string, array<string, string>>
  */
-function auto_register_algorithm() : array
+function autoRegisterAlgorithm() : array
 {
     global $CFG;
     $arr = [];
@@ -25,15 +25,15 @@ function auto_register_algorithm() : array
     }
     return $arr;
 }
-function auto_load_utilities() : void
+function autoLoadUtilities() : void
 {
     global $CFG;
-    if (is_dir($CFG->dirroot . '/utilities')) {
-        $dir = dir($CFG->dirroot . '/utilities');
+    if (is_dir($CFG->dirroot . '/Utilities')) {
+        $dir = dir($CFG->dirroot . '/Utilities');
         while (($entry = $dir->read()) !== false) {
             if ($entry != '.' && $entry != '..') {
                 // @todo prep_match check php extension
-                include $CFG->dirroot . '/utilities/' . $entry;
+                include $CFG->dirroot . '/Utilities/' . $entry;
             }
         }
     }
@@ -43,7 +43,7 @@ function auto_load_utilities() : void
  * @param string $path
  * @return array<int, string>
  */
-function get_children_folders(string $path): array
+function getChildrenFolders(string $path): array
 {
     global $CFG;
     $dirs = [];
@@ -57,7 +57,7 @@ function get_children_folders(string $path): array
     }
     return $dirs;
 }
-function is_valid_algorithm(string $path, string $name): bool
+function isValidAlgorithm(string $path, string $name): bool
 {
     // check for
     if (!file_exists($path . '/' . $name .'.php')) {

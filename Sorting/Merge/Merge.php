@@ -1,8 +1,8 @@
 <?php
-namespace dsa\sorting;
-use dsa\interface\BaseAlgorithm;
-use dsa\utilities\Number;
-use dsa\utilities\Timer;
+namespace Dsa\Sorting;
+use Dsa\Interface\BaseAlgorithm;
+use Dsa\Utilities\Number;
+use Dsa\Utilities\Timer;
 
 /**
  * @author Kenny Tran
@@ -12,10 +12,10 @@ class Merge extends BaseAlgorithm
     public function execute() : void
     {
         // TODO: Implement execute() method.
-        $arr = Number::persistence_random_array();
+        $arr = Number::persistenceRandomArray();
         Timer::start();
 
-        // Implement the merge algorithm (divide and conquer)
+        // Implement the Merge algorithm (divide and conquer)
         $arr = $this->divide($arr);
 
         Timer::stop();

@@ -1,8 +1,8 @@
 <?php
-namespace dsa\sorting;
-use dsa\interface\BaseAlgorithm;
-use dsa\utilities\Number;
-use dsa\utilities\Timer;
+namespace Dsa\Sorting;
+use Dsa\Interface\BaseAlgorithm;
+use Dsa\Utilities\Number;
+use Dsa\Utilities\Timer;
 
 /**
  * @author Kenny Tran
@@ -12,11 +12,11 @@ class Selection extends BaseAlgorithm
     public function execute() : void
     {
         // TODO: Implement execute() method.
-        $arr = Number::persistence_random_array();
+        $arr = Number::persistenceRandomArray();
 
         Timer::start();
 
-        // Implement the selection algorithm (min to max)
+        // Implement the Selection algorithm (min to max)
         $minPos = -1;
         for ($i = 0; $i < count($arr); $i++) {
             for ($j = $i; $j < count($arr); $j++) {

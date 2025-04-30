@@ -1,13 +1,15 @@
 <?php
 use Symfony\Component\Yaml\Yaml;
 
-define('BOOTSTRAP_DIR', __DIR__ . '/bootstrap');
-require_once BOOTSTRAP_DIR . '/autoload.php';
-require_once BOOTSTRAP_DIR . '/config.php';
+define('BOOTSTRAP_DIR', __DIR__ . '/Bootstrap');
 
-auto_load_utilities();
+global $CFG;
+require_once BOOTSTRAP_DIR . '/Autoload.php';
+require_once BOOTSTRAP_DIR . '/Config.php';
+
+autoLoadUtilities();
 try {
-    $list = auto_register_algorithm();
+    $list = autoRegisterAlgorithm();
 } catch (Exception $exception) {
     print $exception->getMessage();
     die();

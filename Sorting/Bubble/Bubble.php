@@ -1,8 +1,8 @@
 <?php
-namespace dsa\sorting;
-use dsa\interface\BaseAlgorithm;
-use dsa\utilities\Number;
-use dsa\utilities\Timer;
+namespace Dsa\Sorting;
+use Dsa\Interface\BaseAlgorithm;
+use Dsa\Utilities\Number;
+use Dsa\Utilities\Timer;
 
 /**
  * @author Kenny Tran
@@ -12,11 +12,11 @@ class Bubble extends BaseAlgorithm
     public function execute() : void
     {
         // TODO: Implement execute() method.
-        $arr = Number::persistence_random_array();
+        $arr = Number::persistenceRandomArray();
 
         Timer::start();
 
-        // Implement the bubble algorithm
+        // Implement the Bubble algorithm
         $length = count($arr);
         while ($length > 0) {
             for ($i = 0; $i < $length - 1; $i++) {
