@@ -7,36 +7,26 @@ function get_config() : \stdClass
 /**
  * @return array<string, array<string, string>>
  */
-function autoRegisterAlgorithm() : array
+function autoRegisterAlgorithm()
 {
     global $CFG;
-    $arr = [];
-    foreach ($CFG->algorithms as $algorithm) {
-        $arr[$algorithm] = [];
-        $folders = getChildrenFolders($algorithm);
-        foreach ($folders as $folder) {
+    $algorithms = [];
+    foreach ($CFG->folders as $folder) {
+        $algorithms[$folder] = [];
+        $sub_folders = getChildrenFolders($folder);
+        foreach ($sub_folders as $sub_folder) {
             // Check for valid structure
-            if (isValidAlgorithm($CFG->dirroot . '/' . $algorithm . '/' . $folder, $folder)) {
-                // include ();
-                include $CFG->dirroot . '/' . $algorithm . '/' . $folder . '/' . $folder. '.php';
-                $arr[$algorithm][] = $folder;
+            if (isValidAlgorithm($CFG->dirroot . '/' . $folder . '/' . $sub_folder, $sub_folder)) {
+                // Do not include class files manually; Composer autoload (PSR-4) will load classes on demand.
+                $algorithms[$folder][] = $sub_folder;
             }
         }
     }
-    return $arr;
+    $CFG->algorithms = $algorithms;
 }
 function autoLoadUtilities() : void
 {
-    global $CFG;
-    if (is_dir($CFG->dirroot . '/Utilities')) {
-        $dir = dir($CFG->dirroot . '/Utilities');
-        while (($entry = $dir->read()) !== false) {
-            if ($entry != '.' && $entry != '..') {
-                // @todo prep_match check php extension
-                include $CFG->dirroot . '/Utilities/' . $entry;
-            }
-        }
-    }
+    // Utilities are autoloaded by Composer; no manual includes required.
 }
 
 /**
@@ -64,4 +54,30 @@ function isValidAlgorithm(string $path, string $name): bool
         throw new Exception("$path is not a valid algorithm");
     }
     return true;
+}
+function findAlgorithm(string $name): array {
+    global $CFG;
+    foreach ($CFG->algorithms as $key=>$algorithms) {
+        foreach ($algorithms as $algorithm) {
+            if ($name == $algorithm) {
+                return ['key' => $key, 'algorithm' => $algorithm];
+            }
+        }
+    }
+    return [];
+}
+function executeAlgorithms($logger) : void {
+    global $CFG;
+    foreach ($CFG->algorithms as $type => $algorithms) {
+        foreach ($algorithms as $algorithm) {
+            if (in_array('all', $CFG->execute) || in_array($algorithm, $CFG->execute)) {
+                print "Execute " . ucfirst($type) . ': ' . ucfirst($algorithm) . "\n";
+                $reflectionClass = new ReflectionClass('Dsa\\' . $type . '\\' . ucfirst($algorithm));
+                $instance = $reflectionClass->newInstance();
+                $instance->execute($logger);
+                print "   *** done\n";
+            }
+
+        }
+    }
 }

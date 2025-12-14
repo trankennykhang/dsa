@@ -9,23 +9,27 @@ require_once BOOTSTRAP_DIR . '/Config.php';
 
 autoLoadUtilities();
 try {
-    $list = autoRegisterAlgorithm();
+    autoRegisterAlgorithm();
 } catch (Exception $exception) {
     print $exception->getMessage();
     die();
 }
 
-foreach ($list as $type => $algorithms) {
-    foreach ($algorithms as $algorithm) {
-        if (in_array('all', $CFG->execute) || in_array($algorithm, $CFG->execute)) {
-        print "********************************\n";
-        print "Execute " . ucfirst($type) . ': ' . ucfirst($algorithm) . "\n";
-        $reflectionClass = new ReflectionClass('dsa\\' . $type . '\\' . ucfirst($algorithm));
-        $instance = $reflectionClass->newInstance();
-        $instance->execute();
-        print "***********DONE******************\n";
-
+// Got more than 1 argvs, check for valid argv (make algorithm name matching case-insensitive)
+if (count($argv) >= 2) {
+    $CFG->execute = [];
+    for ($i = 1; $i < count($argv); $i++) {
+        // normalize input to match stored algorithm names (e.g. "Bubble")
+        $requested = ucfirst(strtolower($argv[$i]));
+        if (empty(findAlgorithm($requested))) {
+            die('Invalid algorithm: ' . $argv[$i]);
+        } else {
+            $CFG->execute[] = $requested;
+        }
     }
 }
+$logger = function($value, $type) {
+    print '   ***  ' . $type . ': ' .$value. "\n";
+};
+executeAlgorithms($logger);
 
-}

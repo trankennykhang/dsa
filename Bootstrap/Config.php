@@ -1,10 +1,10 @@
 <?php
 $CFG = new stdClass();
 
-$CFG->dirroot = '/home/kenny/www/sites/dsa';
+$CFG->dirroot = '/data/www/sites/dsa';
 
-$CFG->algorithms = [
-    "Sorting",
+$CFG->folders = [
+    'Sorting',
     'Searching'
 ];
 

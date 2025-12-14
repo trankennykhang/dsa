@@ -18,4 +18,17 @@
     "friendsofphp/php-cs-fixer": ">=v3.72.0"
 
   }
+  ,
+  "autoload": {
+    "psr-4": {
+      "Dsa\\": ""
+    }
+    ,
+    "classmap": [
+      "Sorting/",
+      "Utilities/",
+      "Interface/",
+      "Logger/"
+    ]
+  }
 }

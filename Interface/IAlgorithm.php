@@ -1,6 +1,6 @@
 <?php
 
-namespace dsa\interface;
+namespace Dsa\Interface;
 interface IAlgorithm
 {
     public function register() : void;

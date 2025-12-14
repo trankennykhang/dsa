@@ -1,4 +1,4 @@
-FROM php:8.2-cli
+FROM php:8.4-cli
 LABEL authors="trank"
 RUN pecl install xdebug-3.2.1 && docker-php-ext-enable xdebug
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"

@@ -3,13 +3,14 @@ namespace Dsa\Sorting;
 use Dsa\Interface\BaseAlgorithm;
 use Dsa\Utilities\Number;
 use Dsa\Utilities\Timer;
+use Dsa\Logger\Logger;
 
 /**
  * @author Kenny Tran
  */
 class Counting extends BaseAlgorithm
 {
-    public function execute() : void
+    public function execute($logger = null) : void
     {
         // TODO: Implement execute() method.
         $arr = Number::persistenceRandomArray();
@@ -36,8 +37,7 @@ class Counting extends BaseAlgorithm
             }
         }
         Timer::stop();
-        print "Total time: " . Timer::getTime() . "\n";
-        print implode(",", $arr);
-        print PHP_EOL;
+        $this->debug(Timer::getTime(), Logger::TOTAL_TIME, $logger);
+        $this->debug(implode(",", $arr), Logger::RESULT, $logger);
     }
 }

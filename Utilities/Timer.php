@@ -1,5 +1,5 @@
 <?php
-namespace dsa\utilities;
+namespace Dsa\Utilities;
 
 class Timer {
     public static float $startTime = 0;

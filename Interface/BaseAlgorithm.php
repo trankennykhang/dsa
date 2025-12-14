@@ -1,12 +1,12 @@
 <?php
-namespace dsa\interface;
+namespace Dsa\Interface;
 
 /**
  * @author Kenny Tran
  */
 abstract class BaseAlgorithm implements IAlgorithm
 {
-    public abstract function execute(): void;
+    public abstract function execute($logger = null): void;
 
     public function register() : void
     {
@@ -23,4 +23,12 @@ abstract class BaseAlgorithm implements IAlgorithm
         // TODO: Implement name() method.
         return __CLASS__;
     }
+    public function debug($value, $type, $logger) : void{
+        if ($logger == null){
+            print '   *** ' . $type . ': ' .$value. "\n";
+        } else {
+            $logger($value, $type);
+        }
+    }
+
 }

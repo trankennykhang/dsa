@@ -1,7 +1,5 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/Functions.php';
-require __DIR__ . '/../Interface/IAlgorithm.php';
-require __DIR__ . '/../Interface/BaseAlgorithm.php';
 
-// Todo autoload files as required
+// Classes are autoloaded via Composer (PSR-4). Keep `Functions.php` for procedural helpers only.
